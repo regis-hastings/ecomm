@@ -3,7 +3,7 @@ const crypto = require('crypto');
 
 class UsersRepository {
   constructor(filename) {
-    if(!filename) {
+    if (!filename) {
       throw new Error('Creating a repository requires a filename');
     }
     this.filename = filename;
@@ -16,23 +16,26 @@ class UsersRepository {
 
   async getAll() {
     return JSON.parse(
-      await fs.promises.readFile(this.filename, { 
-        encoding: 'utf8' 
+      await fs.promises.readFile(this.filename, {
+        encoding: 'utf8'
       })
     );
   }
 
   async create(attrs) {
     attrs.id = this.randomId();
-    
-    const records = await this.getAll(); 
+
+    const records = await this.getAll();
     records.push(attrs);
 
     await this.writeAll(records);
   }
-  
+
   async writeAll(records) {
-    await fs.promises.writeFile(this.filename, JSON.stringify(records, null, 2));
+    await fs.promises.writeFile(
+      this.filename,
+      JSON.stringify(records, null, 2)
+    );
   }
 
   randomId() {
@@ -61,13 +64,35 @@ class UsersRepository {
     Object.assign(record, attrs);
     await this.writeAll(records);
   }
-}
 
+  async getOneBy(filters) {
+    // filters = object like { pw: "secret"}
+    const records = await this.getAll();
+
+    for (let record of records) {
+      let found = true;
+
+      for (let key in filters) {
+        if (record[key] !== filters[key]) {
+          found = false;
+        }
+      }
+
+      if (found) {
+        return record;
+      }
+    }
+  }
+}
 
 const test = async () => {
   const repo = new UsersRepository('users.json');
 
-  await repo.update('efd0087a', { password: 'secret' });
-}
+  const user = await repo.getOneBy({
+    email: 'test@test.com'
+  });
+
+  console.log(user);
+};
 
 test();
