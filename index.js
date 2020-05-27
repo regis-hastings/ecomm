@@ -1,11 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const usersRepo = require('./repositories/users');
 
 const app = express(); // An object that describes all the different things that a web server can do
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => { // This is a "route handler"
- res.send(`
+app.get('/', (req, res) => {
+  // This is a "route handler"
+  res.send(`
   <div>
     <form method="POST">
       <input name="email" placeholder="email" />
@@ -17,8 +19,18 @@ app.get('/', (req, res) => { // This is a "route handler"
  `);
 });
 
-app.post('/', (req, res) => {
-  console.log(req.body);
+app.post('/', async (req, res) => {
+  const { email, password, passwordConfirmation } = req.body;
+
+  const existingUser = await usersRepo.getOneBy({ email });
+  if (existingUser) {
+    return res.send('Email in use');
+  }
+
+  if (password !== passwordConfirmation) {
+    return res.send('Passwords must match');
+  }
+
   res.send('Account created!!!');
 });
 
