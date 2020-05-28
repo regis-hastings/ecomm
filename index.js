@@ -3,13 +3,16 @@ const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const usersRepo = require('./repositories/users');
 
-const app = express(); // An object web server object
+const app = express(); // A web server object
 app.use(bodyParser.urlencoded({ extended: true })); // middleware
-app.use(cookieSession({
- keys: ['1zMsv%l2#6VA'] // encryption key
-}));
+app.use(
+  cookieSession({
+    keys: ['1zMsv%l2#6VA'] // encryption key
+  })
+);
 
-app.get('/signup', (req, res) => { // This is a "route handler"
+// This is a "route handler"
+app.get('/signup', (req, res) => {
   res.send(`
     <div>
       Your id is: ${req.session.userId}
@@ -36,7 +39,7 @@ app.post('/signup', async (req, res) => {
   }
 
   // Create a user in our user repo to represent this person
-  const user = await usersRepo.create( { email, password });
+  const user = await usersRepo.create({ email, password });
 
   // Store the id of that user inside the users cookie
   req.session.userId = user.id; // session object is added to req by cookieSession
@@ -70,7 +73,12 @@ app.post('/signin', async (req, res) => {
     return res.send('Email not found');
   }
 
-  if (user.password !== password) {
+  const validPassword = await usersRepo.comparePasswords(
+    user.password,
+    password
+  );
+
+  if (!validPassword) {
     return res.send('Invalid password');
   }
 
