@@ -6,6 +6,7 @@ const authRouter = require('./routes/admin/auth');
 const app = express(); // A web server object
 
 app.use(bodyParser.urlencoded({ extended: true })); // middleware
+
 app.use(
   cookieSession({
     keys: ['1zMsv%l2#6VA'] // encryption key
