@@ -1,5 +1,5 @@
 const express = require('express');
-const { validationResult, check } = require('express-validator');
+const { validationResult } = require('express-validator');
 
 const usersRepo = require('../../repositories/users');
 const signupTemplate = require('../../views/admin/auth/signup');
