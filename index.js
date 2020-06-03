@@ -5,6 +5,8 @@ const authRouter = require('./routes/admin/auth');
 
 const app = express(); // A web server object
 
+app.use(express.static('public'));
+
 app.use(bodyParser.urlencoded({ extended: true })); // middleware
 
 app.use(
