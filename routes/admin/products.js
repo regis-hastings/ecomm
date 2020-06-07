@@ -38,7 +38,7 @@ router.post(
   }
 );
 
-router.get('/admin/products/:id/edit', async (req, res) => {
+router.get('/admin/products/:id/edit', requireAuth, async (req, res) => {
   const product = await productsRepo.getOne(req.params.id);
 
   if (!product) {
@@ -47,5 +47,7 @@ router.get('/admin/products/:id/edit', async (req, res) => {
 
   res.send(productsEditTemplate({ product }));
 });
+
+router.post('/admin/products/:id/edit', requireAuth, async (req, res) => {});
 
 module.exports = router;
