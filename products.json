@@ -1,20 +1,8 @@
 [
   {
-    "title": "Salami",
+    "title": "Cheese",
     "price": 10,
-    "image": "",
-    "id": "4264cc47"
-  },
-  {
-    "title": "Gouda",
-    "price": 8,
-    "image": "",
-    "id": "d7e0108c"
-  },
-  {
-    "title": "Olives",
-    "price": 7,
-    "image": "",
-    "id": "75f761e8"
+    "image": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABO0lEQVQ4T2NUmPPuPwMFgJFmBohxMTL8/sfA8P4HwoHMjAwMf9Hci+ECB1lWhjITTgZNIWaGL7//M/Se/c4gzcPEoCfCzCDGxcTguPoTiocxDEjSZmeoteDCGirX3v5l8N5AwABxLiaGE5H8YAM+/frPsPPBLwYdERaGZ1/+MXSe/s5w+8Nf/C4wl2RhWOHFC1Z0/Nkfhqjtn/HGEYYX4rTYGRotIV7Yfv8Xw6zLPxi4WRkZjj77g9UgDAOarLgYYjXZURSvvf2ToeTQN+IMWOLBw2AtzQpW3H3mO8P7H/8Ytt7/DQ4PbADDBQdC+Rjk+ZjBao2WfkBJB0QZcDicn0GGhwms1mHVR4aHn/+RFoj1lpwMCVocDL///WdI2vmF4QiOwIOZijUvKPAxgZ3+EYe/kZ1Eu8xEbA4HAFVzi6GUx5qjAAAAAElFTkSuQmCC",
+    "id": "ef02d41a"
   }
 ]
